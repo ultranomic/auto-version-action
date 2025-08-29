@@ -576,13 +576,16 @@ runs:
 
         # Commit the version bump
         git add package.json pnpm-lock.yaml
-        git commit -m "chore: bump version to $NEW_VERSION [skip version]
+        git commit -m "$(cat <<'EOF'
+        chore: bump version to $NEW_VERSION [skip version]
 
         Automated version bump based on Gemini analysis:
         - Analysis: $BUMP_TYPE version bump
         - Previous commits analyzed: ${{ inputs.diff-range }}
 
-        This commit includes [skip version] to prevent recursive workflows."
+        This commit includes [skip version] to prevent recursive workflows.
+        EOF
+        )"
 
         # Create the tag
         git tag "v$NEW_VERSION"
