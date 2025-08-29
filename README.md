@@ -19,7 +19,7 @@ A reusable GitHub Action that analyzes git changes using Gemini AI and automatic
 
 ```yaml
 - name: Auto Version Bump
-  uses: your-username/auto-version-action@v1
+  uses: ultranomic/auto-version-action@v1
   with:
     gemini-api-key: ${{ secrets.GEMINI_API_KEY }}
 ```
@@ -104,7 +104,7 @@ The action intelligently detects your project type by analyzing:
 ```yaml
 - name: Auto Version Bump
   id: version
-  uses: your-username/auto-version-action@v1
+  uses: ultranomic/auto-version-action@v1
   with:
     gemini-api-key: ${{ secrets.GEMINI_API_KEY }}
 
@@ -123,7 +123,7 @@ The action intelligently detects your project type by analyzing:
 
 ```yaml
 - name: Auto Version Bump
-  uses: your-username/auto-version-action@v1
+  uses: ultranomic/auto-version-action@v1
   with:
     gemini-api-key: ${{ secrets.GEMINI_API_KEY }}
     project-type: 'typescript-library' # Override detection
@@ -135,7 +135,7 @@ The action intelligently detects your project type by analyzing:
 
 ```yaml
 - name: Custom Analysis
-  uses: your-username/auto-version-action@v1
+  uses: ultranomic/auto-version-action@v1
   with:
     gemini-api-key: ${{ secrets.GEMINI_API_KEY }}
     custom-prompt: |
@@ -152,7 +152,7 @@ The action intelligently detects your project type by analyzing:
 
 ```yaml
 - name: Test Version Analysis
-  uses: your-username/auto-version-action@v1
+  uses: ultranomic/auto-version-action@v1
   with:
     gemini-api-key: ${{ secrets.GEMINI_API_KEY }}
     dry-run: 'true'
@@ -163,7 +163,7 @@ The action intelligently detects your project type by analyzing:
 ````yaml
 - name: Auto Version Bump
   id: version
-  uses: your-username/auto-version-action@v1
+  uses: ultranomic/auto-version-action@v1
   with:
     gemini-api-key: ${{ secrets.GEMINI_API_KEY }}
 
@@ -192,7 +192,7 @@ The action intelligently detects your project type by analyzing:
 ```yaml
 - name: Version Bump Only (No Push)
   id: version
-  uses: your-username/auto-version-action@v1
+  uses: ultranomic/auto-version-action@v1
   with:
     gemini-api-key: ${{ secrets.GEMINI_API_KEY }}
     auto-push: 'false'
@@ -225,7 +225,7 @@ jobs:
       # Auto-bump version and generate changelog
       - name: Auto Version Bump
         id: version
-        uses: your-username/auto-version-action@v1
+        uses: ultranomic/auto-version-action@v1
         with:
           gemini-api-key: ${{ secrets.GEMINI_API_KEY }}
           project-type: 'typescript-library'
