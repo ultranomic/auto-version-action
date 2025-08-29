@@ -79,7 +79,7 @@ jobs:
           - name: Auto Version Bump
             uses: ${REPO}@v${NEW_VERSION}
             with:
-              gemini-api-key: \${{ secrets.GEMINI_API_KEY }}
+              gemini-api-key: YOUR_GEMINI_KEY_HERE
           \`\`\`
           EOF
 
