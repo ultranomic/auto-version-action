@@ -1,0 +1,24 @@
+{
+  "name": "auto-version-action",
+  "version": "1.0.0",
+  "description": "AI-powered semantic version bumping using Google Gemini",
+  "type": "module",
+  "keywords": [
+    "github-actions",
+    "semantic-versioning",
+    "ai",
+    "gemini",
+    "automation"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ultranomic/auto-version-action.git"
+  },
+  "devDependencies": {
+    "prettier": "^3.6.2"
+  },
+  "scripts": {
+    "format": "prettier --write ."
+  }
+}

@@ -1,0 +1,60 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  auto-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Auto Version Bump
+        id: version
+        uses: ./
+        with:
+          gemini-api-key: ${{ secrets.GEMINI_API_KEY }}
+          project-type: 'generic'
+          main-files: 'action.yml,README.md'
+
+      - name: Create GitHub Release
+        if: steps.version.outputs.version-bumped == 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NEW_VERSION: ${{ steps.version.outputs.new-version }}
+          CHANGELOG: ${{ steps.version.outputs.changelog }}
+          REPO: ${{ github.repository }}
+        run: |
+          # Write release notes to file to handle special characters
+          cat > release-notes.md << EOF
+          ## What's Changed
+
+          ${CHANGELOG}
+
+          ## Usage
+
+          \`\`\`yaml
+          - name: Auto Version Bump
+            uses: ${REPO}@v${NEW_VERSION}
+            with:
+              gemini-api-key: \${{ secrets.GEMINI_API_KEY }}
+          \`\`\`
+          EOF
+
+          gh release create "v$NEW_VERSION" \
+            --title "Release v$NEW_VERSION" \
+            --notes-file release-notes.md
+
+      - name: Update major version tag
+        if: steps.version.outputs.version-bumped == 'true'
+        run: |
+          NEW_VERSION="${{ steps.version.outputs.new-version }}"
+          MAJOR_TAG="v$(echo $NEW_VERSION | cut -d. -f1)"
+          git tag -fa $MAJOR_TAG -m "Update $MAJOR_TAG tag to v$NEW_VERSION"
+          git push origin $MAJOR_TAG --force
