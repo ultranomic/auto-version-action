@@ -84,7 +84,7 @@ jobs:
           EOF
 
           gh release create "v$NEW_VERSION" \
-            --title "Release v$NEW_VERSION" \
+            --title "v$NEW_VERSION" \
             --notes-file release-notes.md
 
       - name: Update major version tag
